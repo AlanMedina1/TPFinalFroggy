@@ -15,12 +15,21 @@ var config = {
 
 var game = new Phaser.Game(config);
 
+var camarita;
+var bordes;
+
+var lives = 3;
+var livesText;
+var lifeLostText;
+var livesImage;
+
 var score;
 var scoreText;
 var gameOver;
 
+
 var player;
-var platform;
+var platforms;
 var araña;
 
 
@@ -36,3 +45,13 @@ var level = 0
 var timedEvent;
 var initialTime;
 var timeText;
+
+var layerfondo;
+var layersuelo;
+var layerplataforma;
+var layerhongo;
+var map;
+
+var musicConfig;
+
+
