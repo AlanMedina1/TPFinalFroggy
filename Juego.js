@@ -6,7 +6,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 240 },
+            gravity: { y: 220 },
             debug: true
         }
     },
@@ -17,6 +17,8 @@ var game = new Phaser.Game(config);
 
 var camarita;
 var bordes;
+
+var froggycambio;
 
 var lives = 3;
 var livesText;

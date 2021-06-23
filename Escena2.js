@@ -19,42 +19,15 @@ create() {
     
     this.music.play(musicConfig);
     
-    
-    
- /*const map = this.make.tilemap({ key: 'tilemap'})
-
- const tileset1 = map.addTilesetImage('fondo grande', 'tilesfondo')
-
- const tileset2 = map.addTilesetImage('Nivel1','tilesplat')
-
- const tileset3 = map.addTilesetImage('HONGO','HONGO')
-
- /*const ground = map.createLayer('Plataformas', tileset2)
- ground.setCollisionByProperty({ collides: true})
- this.matter.World.converTilemapLayer(ground)
 
 
- map.createLayer('Fondo', tileset1)
- map.createLayer('Suelo', tileset2)
- map.createLayer('Plataformas', tileset2)
- map.createLayer('honguito', tileset3)*/
-
- //this.physics.add.collider(this.player, tileset2)
- //tileset2.setCollisionBetween(2,3);
  var map = this.make.tilemap({ key: 'tilemap' });
  
  var tileset1 = map.addTilesetImage('fondo grande', 'tilesfondo');
 
  layerfondo = map.createLayer('Fondo', tileset1)
  
- /*const map = this.make.tilemap ({ key: 'tilemap'});
- const tileset = map.addTilesetImage('mapa1', 'tilesfondo');
- const fondolayer = map.createLayer('fondo', tileset, 0, 0);
- const platformlayer = map.createLayer('ground', tileset, 0, 0);
- const hongolayer = map.createLayer('hongo', tileset, 0, 0);
 
- platformlayer.setCollisionBetween(989,1055);
- this.physics.add.collider(this.player,platformlayer)*/
  bordes = this.physics.add.staticGroup();
  
  bordes.create(3, 640, 'bordes' );
@@ -108,7 +81,7 @@ create() {
   score = 0;
   gameOver = false;
 
-  initialTime = 60
+  initialTime = 45
 
   timedEvent = this.time.addEvent({ delay: 1000, callback: this.onSecond, callbackScope: this, loop: true });
   timeText = this.add.text(660, 16, '00', { fontSize: '32px', fill: '#56d467' });
@@ -131,6 +104,14 @@ create() {
  livesImage.scrollFactorX = 0;
  livesImage.scrollFactorY = 0;
  
+
+ 
+ /*froggycambio = this.physics.add.group({
+    key: 'froggylevel',
+    setScale: { x: 2, y: 2},
+    setXY: { x: 512, y: 0 }
+ });*/
+
 
 }
 
@@ -174,6 +155,16 @@ update()
         
     
 }
+//esto llevaría a la escena 3 = Nivel 2, pero provoca error.
+ /*cambiofroggy (player, froggycambio)
+    {
+    this.add.image(512,380, 'boceto fondoprueba2').setScale(1);
+    scoreText = this.add.text(512, 200, 'score: 0', { fontSize: '60px', fill: '#000' });
+    var introjugbutton = this.add.image(512, 350, 'interjugar').setScale(2.50);
+    introjugbutton.setInteractive();
+    introjugbutton.on('pointerdown',()=> this.scene.start('nivel2') && this.sound.play('introbutton'));
+    }*/
+
 
  gameOver() {  
         gameOver = true;

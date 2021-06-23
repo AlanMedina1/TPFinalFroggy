@@ -5,6 +5,7 @@ constructor () {
 
 preload ()
 {
+    this.load.image('froggylevel', 'assets/Images/froggylevel.png')  
     this.load.image ('boceto fondoprueba2', 'assets/Images/boceto fondoprueba2.png');
     this.load.image('bordes', 'assets/Images/bordes.png');
     this.load.image ('interConfig', 'assets/Images/interconfig.png');
