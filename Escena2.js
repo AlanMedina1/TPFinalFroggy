@@ -34,6 +34,7 @@ create() {
  bordes.create(1021, 640, 'bordes');
  bordes.create(3, 1280, 'bordes' );
  bordes.create(1021, 1280, 'bordes');
+ 
  platforms = this.physics.add.staticGroup();
  
  
@@ -92,7 +93,7 @@ create() {
 
  //life
  life = this.physics.add.group();
- life.create(15,1550, 'pulife').setScale(0.3)
+ life.create(20,1550, 'pulife').setScale(0.3)
 
  //scorelife
  life.children.iterate(function (child){

@@ -93,7 +93,7 @@ create() {
 
  var introjugbutton = this.add.image(512,300, 'interjugar').setScale(2.50)
  introjugbutton.setInteractive()
- introjugbutton.on('pointerdown',()=> this.scene.start('juego') && this.sound.play('introbutton')) /// CAMBIAR A NIVEL JUEGO DESPUÉS
+ introjugbutton.on('pointerdown',()=> this.scene.start('nivel2') && this.sound.play('introbutton')) /// CAMBIAR A NIVEL JUEGO DESPUÉS
 
  var introjugbutton = this.add.image(690,200, 'intercreditos').setScale(3)
  introjugbutton.setInteractive()

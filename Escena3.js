@@ -28,6 +28,8 @@ class Escena3 extends Phaser.Scene {
  bordes.create(1021, 640, 'bordes');
  bordes.create(3, 1280, 'bordes' );
  bordes.create(1021, 1280, 'bordes');
+ bordes.create(3, 1370, 'bordes' );
+ bordes.create(1021, 1370, 'bordes');
  platforms = this.physics.add.staticGroup();
  
  
