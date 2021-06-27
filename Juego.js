@@ -7,7 +7,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 220 },
-            debug: true
+            debug: false
         }
     },
     scene: [Escena1, Escena2, Escena3, Escena4, Escena5, Escena6, Escena7]
