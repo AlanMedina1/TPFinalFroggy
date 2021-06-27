@@ -1,8 +1,15 @@
+
 var config = {
     
     type: Phaser.AUTO,
-    width: 1024,
-    height: 768,
+    scale:{
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.NO_CENTER,
+        width: 1024,
+        height: 768,
+    },
+    
+    
     physics: {
         default: 'arcade',
         arcade: {
@@ -10,7 +17,7 @@ var config = {
             debug: true
         }
     },
-    scene: [Escena1, Escena2, Escena3, Escena4, Escena5, Escena6, Escena7]
+    scene: [Escena1, Escena2, Escena3, Escena4, Escena5, Escena6, Escena7, Escena8]
 };
 
 var game = new Phaser.Game(config);

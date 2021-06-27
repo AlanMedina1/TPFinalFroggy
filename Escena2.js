@@ -81,9 +81,12 @@ create() {
 
 
   //time
-  time = this.physics.add.group();
-  time.create(513, 1580, 'putiempo').setScale(0.2)
-
+  time = this.physics.add.group({
+    key: 'putiempo',
+    repeat: Phaser.Math.FloatBetween(1,3),
+    setXY: { x: 513, y: 1600, stepX: 150, stepY: 50 },
+    setScale: { x: 0.2, y: 0.2},
+})
   //timed
   time.children.iterate(function (child){
     child.setBounceY(Phaser.Math.FloatBetween(0.1, 0.6));
@@ -92,8 +95,12 @@ create() {
  })
 
  //life
- life = this.physics.add.group();
- life.create(20,1550, 'pulife').setScale(0.3)
+ life = this.physics.add.group({
+    key: 'pulife',
+    repeat: Phaser.Math.FloatBetween(1, 2),
+    setXY: { x: 20, y: 1550, stepX: 400, stepY: 50 },
+    setScale: { x: 0.3, y: 0.3},
+})
 
  //scorelife
  life.children.iterate(function (child){
@@ -103,19 +110,13 @@ create() {
  })
 
  //enemigo
- /*araña = this.physics.add.group();
- araña.create(100, 300, 'arañaenemy').setScale(0.4)
- araña.create(200, 1030, 'arañaenemy'). setScale(0.4)
- araña.create(350, 1000, 'arañaenemy'). setScale(0.4)*/
- 
-
- //otro codigo enemigo
  araña = this.physics.add.group({
     key: 'arañaenemy',
     repeat: 1,
     setXY: { x: 400, y: 200, stepX: 200, stepY: 200 },
     setScale: { x: 0.50, y: 0.50},
 });
+
  //cambio de escena
  froggycambio = this.physics.add.group({
     key: 'froggylevel',
@@ -132,8 +133,8 @@ create() {
   // mosca recolectables!
   recomosca = this.physics.add.group({
     key: 'mosca',
-    repeat: 10,
-    setXY: { x: 250, y: 100, stepX: 120, stepY: 50 },
+    repeat: Phaser.Math.FloatBetween(2,10),
+    setXY: { x: 250, y: 350, stepX: 80, stepY: 50 },
     setScale: { x: 0.1, y: 0.1},
     
  });
@@ -295,20 +296,6 @@ update()
      if(lives == 0) {
           this.gameOver()
      }
-}
-
-//patrullaje de arañas
-patrolPlatform(araña, platforms){
-    araña.setCollideWorldBounds(false);
-    araña.setBounce(0.7);
-    araña.setVelocity(Phaser.Math.Between(-200, 200),20)
-    araña.allowGravity = true;
-    if (araña.body.velocity.x > 0 && araña.right > platforms.right) {
-        araña.body.velocity,x *= -1; //direccion reversa
-    }
-    else if (araña.body.velocity.x < 0 && araña.left< platforms.left) {
-        araña.body.velocity.x *= -1;
-    }
 }
 
  gameOver() {  

@@ -36,9 +36,9 @@ class Escena3 extends Phaser.Scene {
     platforms.create(513, 2070, 'groundmain').setScale(4.60).refreshBody();
 
     platforms.create(513, 100, 'groundniv2'); // plat alta medio pu
-    platforms.create(50, 250, 'groundniv2.1'); // plat izq alta anteulti
+    platforms.create(20, 250, 'groundniv2.1'); // plat izq alta anteulti
     platforms.create(920, 220, 'groundniv2'); //plataforma a la derecha medioalta más alta
-    platforms.create(110, 450, 'groundniv2.1'); //plataforma izquierda alta tercera
+    platforms.create(70, 450, 'groundniv2.1'); //plataforma izquierda alta tercera
     platforms.create(450, 500, 'groundniv2'); //plataforma en el medio sexta
     platforms.create(50, 1020, 'groundniv2.1'); // segunda plataforma izquierda baja
     platforms.create(800, 650, 'groundniv2'); // quinta plataforma hacia la derecha
@@ -49,7 +49,7 @@ class Escena3 extends Phaser.Scene {
     platforms.create(450, 950, 'groundniv2.1'); // plat derecha anteulti 
     platforms.create(150, 610, 'groundniv2'); //plat izquierda segunda
     platforms.create(600, 300, 'groundniv2.1'); //arriba medio sexto
-    platforms.create(80, 1720, 'groundniv2'); // plat izq baja
+    platforms.create(150, 1720, 'groundniv2'); // plat izq baja
     platforms.create(1020, 1720, 'groundniv2.1'); //plat derecha baja
     platforms.create(15, 1500, 'groundniv2'); //izq baja 2
     platforms.create(350, 1400, 'groundniv2.1'); // medio izq
@@ -57,8 +57,11 @@ class Escena3 extends Phaser.Scene {
     platforms.create(550, 1670, 'groundniv2.1'); // plat baja medio
     platforms.create(1030, 1500, 'groundniv2'); // plat derecha 2
     platforms.create(210, 1200, 'groundniv2.1'); // plat medio izquierda medioalt
-    platforms.create(1030, 1830, 'groundniv2'); // plat derecha 2
+    platforms.create(800, 1830, 'groundniv2'); // plat derecha 2
     platforms.create(210, 1890, 'groundniv2.1'); 
+ 
+    platforms.create(800, 1310, 'groundniv2');
+
 
 // The player and its settings
 player = this.physics.add.sprite(512, 1850, 'Froggy');
@@ -76,9 +79,12 @@ this.physics.add.collider(player, bordes);
 
 
 //time
-time = this.physics.add.group();
-time.create(513, 1580, 'putiempo').setScale(0.2)
-
+time = this.physics.add.group({
+    key: 'putiempo',
+    repeat: Phaser.Math.FloatBetween(0,2),
+    setXY: { x: 513, y: 1600, stepX: 150, stepY: 50 },
+    setScale: { x: 0.2, y: 0.2},
+})
 //timed
 time.children.iterate(function (child){
   child.setBounceY(Phaser.Math.FloatBetween(0.1, 0.6));
@@ -87,8 +93,12 @@ time.children.iterate(function (child){
 })
 
 //life
-life = this.physics.add.group();
-life.create(15,1550, 'pulife').setScale(0.3)
+life = this.physics.add.group({
+    key: 'pulife',
+    repeat: Phaser.Math.FloatBetween(0, 1),
+    setXY: { x: 100, y: 1300, stepX: 400, stepY: 50 },
+    setScale: { x: 0.3, y: 0.3},
+})
 
 //scorelife
 life.children.iterate(function (child){
@@ -103,8 +113,8 @@ araña.create(100, 300, 'arañaenemy').setScale(0.4)
 araña.create(200, 1030, 'arañaenemy'). setScale(0.4)
 araña.create(350, 1000, 'arañaenemy'). setScale(0.4)
 araña.create(350, 1000, 'arañaenemy'). setScale(0.4)
-araña.create(350, 1000, 'arañaenemy'). setScale(0.4)
-araña.create(350, 1000, 'arañaenemy'). setScale(0.4)
+araña.create(900, 1000, 'arañaenemy'). setScale(0.4)
+araña.create(800, 1000, 'arañaenemy'). setScale(0.4)
 
 //cambio de escena
 froggycambioWin = this.physics.add.group({
@@ -122,7 +132,7 @@ froggycambioWin.children.iterate(function (child) {
 // mosca recolectables!
 recomosca = this.physics.add.group({
   key: 'mosca',
-  repeat: 10,
+  repeat: Phaser.Math.FloatBetween(2,10),
   setXY: { x: 250, y: 350, stepX: 80, stepY: 50 },
   setScale: { x: 0.1, y: 0.1},
   
@@ -185,8 +195,6 @@ this.physics.add.overlap(player, froggycambioWin, this.cambiofroggywin, null, th
 
 livesText = this.add.text(80, 16,  'Vidas: ' +lives, { font: '32px', fill: '#56d467' });
 livesImage = this.add.image (45, 30, 'pulife').setScale(0.5);
-//lifeLostText = this.add.text(20, 20, 'Life lost', { font: '32px', fill: '#56d467' });
-//lifeLostText.visible = false;
 livesText.scrollFactorX = 0;
 livesText.scrollFactorY = 0;
 livesImage.scrollFactorX = 0;
@@ -289,16 +297,12 @@ cambiofroggywin (player, froggycambioWin)
 //patrullaje de arañas
 patrolPlatform(araña, platforms){
    araña.setCollideWorldBounds(false);
-   araña.setBounce(0.7);
+   araña.setBounce(0.8);
    araña.setVelocity(Phaser.Math.Between(-200, 200),20)
    araña.allowGravity = true;
-   if (araña.body.velocity.x > 0 && araña.right > platforms.right) {
-       araña.body.velocity,x *= -1; //direccion reversa
-   }
-   else if (araña.body.velocity.x < 0 && araña.left< platforms.left) {
-       araña.body.velocity.x *= -1;
-   }
+   
 }
+
 
 gameOver2() {  
     gameOver2 = true;

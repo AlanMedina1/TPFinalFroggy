@@ -5,6 +5,7 @@ constructor () {
 
 preload ()
 {
+    this.load.image('intro', 'assets/Images/intro.png') 
     this.load.image('ayudatabsito', 'assets/Images/ayudatabsito.png')
     this.load.image('transicion', 'assets/Images/transiciónlevel.png') 
     this.load.image('win', 'assets/Images/winreco.png') 
@@ -23,7 +24,7 @@ preload ()
     this.load.image ('groundmain', 'assets/Images/plataformaextra.png')
     this.load.image ('groundniv2', 'assets/Images/plataformanivel2.png')
     this.load.image ('groundniv2.1', 'assets/Images/plataforma2ver2.png')
-    this.load.image ('arañaenemy', 'assets/Images/arañaenemy.png');
+    this.load.image ('arañaenemy', 'assets/Images/arañaenemy.png', { frameWidth: 256, frameHeight: 256});
     this.load.image ('mosca', 'assets/Images/PUMOSCA.png'), { frameWidth: 256, frameHeight: 256}
     this.load.image ('pulife', 'assets/Images/PULIFE.png')
     this.load.image ('putiempo', 'assets/Images/PUTiempo.png')
@@ -80,9 +81,6 @@ create() {
     frameRate: 20
    })
 
-
- 
-
  /*this.anims.create({
   key: 'interjugar',
   frames: this.anims.generateFrameNumbers('interjugar', { start: 0, end: 1 }),
@@ -93,7 +91,7 @@ create() {
 
  var introjugbutton = this.add.image(512,300, 'interjugar').setScale(2.50)
  introjugbutton.setInteractive()
- introjugbutton.on('pointerdown',()=> this.scene.start('nivel2') && this.sound.play('introbutton')) /// CAMBIAR A NIVEL JUEGO DESPUÉS
+ introjugbutton.on('pointerdown',()=> this.scene.start('intro') && this.sound.play('introbutton')) /// CAMBIAR A NIVEL JUEGO DESPUÉS
 
  var introjugbutton = this.add.image(690,200, 'intercreditos').setScale(3)
  introjugbutton.setInteractive()
