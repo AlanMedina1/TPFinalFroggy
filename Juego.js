@@ -10,7 +10,7 @@ var config = {
             debug: true
         }
     },
-    scene: [Escena1, Escena2, Escena3, Escena4, Escena5]
+    scene: [Escena1, Escena2, Escena3, Escena4, Escena5, Escena6, Escena7]
 };
 
 var game = new Phaser.Game(config);
@@ -20,7 +20,9 @@ var bordes;
 
 var froggycambio;
 
-var lives = 3;
+var froggycambioWin;
+
+var lives;
 var livesText;
 var lifeLostText;
 var livesImage;
@@ -29,16 +31,17 @@ var score;
 var scoreText;
 var gameOver;
 
+var gameOver2;
 
 var player;
 var platforms;
 var araña;
-
+var xCoordinate;
 
 var cursors;
-var pulife;
-var pumosca;
-var putime;
+var life;
+var recomosca;
+var time;
 var nenufar;
 var platformsjump;
 
@@ -48,10 +51,13 @@ var timedEvent;
 var initialTime;
 var timeText;
 
+var timedEvent2;
+var initialTime2;
+var timeText2;
+
 var layerfondo;
 var layersuelo;
 var layerplataforma;
-var layerhongo;
 var map;
 
 var musicConfig;

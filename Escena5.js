@@ -37,7 +37,7 @@ class Escena5 extends Phaser.Scene {
       Phaser.Display.Align.In.Center(puntajefinal, this.add.zone(500, 100, 1024, 768));
 
 
-
+      //CODIGO QUE FUNCIONA
       var restartButton = this.add.image(250, 200, 'Reintentar64').setScale(1.50)
       restartButton.setInteractive()
       restartButton.on('pointerdown', () => this.scene.start('juego') && this.sound.play('Reintentar'))
@@ -45,10 +45,28 @@ class Escena5 extends Phaser.Scene {
       var gobackButton = this.add.image(750, 200, 'Volver64').setScale(1.50)
       gobackButton.setInteractive()
       gobackButton.on('pointerdown', () => this.scene.start('inicio') && this.sound.play('volver'))
-  
-    }
 
-   /*reiniciar() {
-      this.scene.start('juego');
-    }*/
-}
+      //CODIGO QUE FUNCA PERO NO FUNCA
+      /*if (gameOver && this.scene.start('nivel2'))
+      {
+        var restartButton = this.add.image(250, 200, 'Reintentar64').setScale(1.50)
+        restartButton.setInteractive()
+        restartButton.on('pointerdown', () => this.scene.start('nivel2') && this.sound.play('Reintentar'))
+        /*var gobackButton = this.add.image(750, 200, 'Volver64').setScale(1.50)
+      gobackButton.setInteractive()
+      gobackButton.on('pointerdown', () => this.scene.start('inicio') && this.sound.play('volver'))*/
+      
+      /*else if (gameOver && this.scene.start('juego'))
+      { var restartButton = this.add.image(250, 200, 'Reintentar64').setScale(1.50)
+      restartButton.setInteractive()
+      restartButton.on('pointerdown', () => this.scene.start('juego') && this.sound.play('Reintentar'))}
+
+      var gobackButton = this.add.image(750, 200, 'Volver64').setScale(1.50)
+      gobackButton.setInteractive()
+      gobackButton.on('pointerdown', () => this.scene.start('inicio') && this.sound.play('volver'))*/
+  
+      //OTRO CODIGO PRUEBA
+      
+    }
+  
+ }
