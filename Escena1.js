@@ -22,8 +22,6 @@ preload ()
     this.load.image ('ground', 'assets/Images/plataformanivel1.png')
     this.load.image ('ground2', 'assets/Images/plataforma1ver2.png')
     this.load.image ('groundmain', 'assets/Images/plataformaextra.png')
-    this.load.image ('groundniv2', 'assets/Images/plataformanivel2.png')
-    this.load.image ('groundniv2.1', 'assets/Images/plataforma2ver2.png')
     this.load.image ('arañaenemy', 'assets/Images/arañaenemy.png', { frameWidth: 256, frameHeight: 256});
     this.load.image ('mosca', 'assets/Images/PUMOSCA.png'), { frameWidth: 256, frameHeight: 256}
     this.load.image ('pulife', 'assets/Images/PULIFE.png')
@@ -45,12 +43,13 @@ preload ()
     this.load.audio ('creditsbutton', 'assets/Sounds/creditsbutton.wav'); 
     this.load.audio ('tiempoextra', 'assets/Sounds/tiempoextra.wav'); 
     this.load.spritesheet('Froggy', 'assets/Images/Froggy.png', { frameWidth: 256, frameHeight: 256});
-    //this.load.image('tilesplat', 'assets/Nivel1.png');
-    //this.load.image('HONGO', 'assets/HONGO.png')
     this.load.image('tilesfondo', 'assets/fondo grande.png')
-    this.load.tilemapTiledJSON('tilemap', 'assets/MapaActualizado.json')
+    this.load.tilemapTiledJSON('tilemap', 'assets/MapaActualizado.json') 
     this.load.image('tilesfondo2', 'assets/nivel 2/MapaNivel2.png')
-    this.load.tilemapTiledJSON('tilemap2', 'assets/nivel 2/Tilemap2.json')
+    this.load.tilemapTiledJSON('tilemap2', 'assets/nivel 2/Tilemap2ver2.json')
+    this.load.image('groundniv2', 'assets/Images/plataformanivel2juntas.png')
+    //this.load.image ('groundniv2', 'assets/Images/plataformanivel2.png')
+    //this.load.image ('groundniv2.1', 'assets/Images/plataforma2ver2.png')
 }
 
 create() {
@@ -91,7 +90,7 @@ create() {
 
  var introjugbutton = this.add.image(512,300, 'interjugar').setScale(2.50)
  introjugbutton.setInteractive()
- introjugbutton.on('pointerdown',()=> this.scene.start('intro') && this.sound.play('introbutton')) /// CAMBIAR A NIVEL JUEGO DESPUÉS
+ introjugbutton.on('pointerdown',()=> this.scene.start('juego') && this.sound.play('introbutton')) /// CAMBIAR A NIVEL JUEGO DESPUÉS
 
  var introjugbutton = this.add.image(690,200, 'intercreditos').setScale(3)
  introjugbutton.setInteractive()

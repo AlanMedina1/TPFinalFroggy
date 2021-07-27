@@ -18,10 +18,9 @@ class Escena3 extends Phaser.Scene {
    
    this.music.play(musicConfig);
   
- var map = this.make.tilemap({ key: 'tilemap2' });
- var tileset2 = map.addTilesetImage('MapaNivel2', 'tilesfondo2');
- layerfondo = map.createLayer('Fonditotile', tileset2)
+ 
 
+//bordes del mundo
  bordes = this.physics.add.staticGroup();
  
  bordes.create(3, 640, 'bordes' );
@@ -33,43 +32,25 @@ class Escena3 extends Phaser.Scene {
  platforms = this.physics.add.staticGroup();
  
  
-    platforms.create(513, 2070, 'groundmain').setScale(4.60).refreshBody();
+    //plataforma de los tiles
+    //tilemaps
 
-    platforms.create(513, 100, 'groundniv2'); // plat alta medio pu
-    platforms.create(20, 250, 'groundniv2.1'); // plat izq alta anteulti
-    platforms.create(920, 220, 'groundniv2'); //plataforma a la derecha medioalta más alta
-    platforms.create(70, 450, 'groundniv2.1'); //plataforma izquierda alta tercera
-    platforms.create(450, 500, 'groundniv2'); //plataforma en el medio sexta
-    platforms.create(50, 1020, 'groundniv2.1'); // segunda plataforma izquierda baja
-    platforms.create(800, 650, 'groundniv2'); // quinta plataforma hacia la derecha
-    platforms.create(550, 1100, 'groundniv2.1'); // plat derecha anteulti 
-    platforms.create(50, 810, 'groundniv2'); //plat izquierda segunda
-    platforms.create(400, 740, 'groundniv2.1'); //plataforma en medio bajo
-    platforms.create(800, 1000, 'groundniv2'); //bajo derecha
-    platforms.create(450, 950, 'groundniv2.1'); // plat derecha anteulti 
-    platforms.create(150, 610, 'groundniv2'); //plat izquierda segunda
-    platforms.create(600, 300, 'groundniv2.1'); //arriba medio sexto
-    platforms.create(150, 1720, 'groundniv2'); // plat izq baja
-    platforms.create(1020, 1720, 'groundniv2.1'); //plat derecha baja
-    platforms.create(15, 1500, 'groundniv2'); //izq baja 2
-    platforms.create(350, 1400, 'groundniv2.1'); // medio izq
-    platforms.create(700, 1400, 'groundniv2'); // medio der
-    platforms.create(550, 1670, 'groundniv2.1'); // plat baja medio
-    platforms.create(1030, 1500, 'groundniv2'); // plat derecha 2
-    platforms.create(210, 1200, 'groundniv2.1'); // plat medio izquierda medioalt
-    platforms.create(800, 1830, 'groundniv2'); // plat derecha 2
-    platforms.create(210, 1890, 'groundniv2.1'); 
+ var map = this.make.tilemap({ key: 'tilemap2' });
  
-    platforms.create(800, 1310, 'groundniv2');
-
-
+ var tileset1 = map.addTilesetImage('MapaNivel2', 'tilesfondo2');
+ var tileset2 = map.addTilesetImage('plataformaextra','groundmain');
+ var tileset3 = map.addTilesetImage('plataformanivel2juntas', 'groundniv2');
+ 
+ layerfondo = map.createLayer('fondo', tileset1);
+ layersuelo = map.createLayer('suelo', tileset2, 0, 0);
+ layerplataforma2 = map.createLayer('platform1', tileset3, 0, 0);
 // The player and its settings
 player = this.physics.add.sprite(512, 1850, 'Froggy');
 
 //  Player physics properties. Give the little guy a slight bounce.
 player.setBounce(0.2);
 player.setCollideWorldBounds(false);
-player.setScale(0.3);
+player.setScale(0.25);
 
 camarita= this.cameras.main;
 this.cameras.main.setBounds(0, 0, 1024, 2080);
@@ -77,6 +58,15 @@ this.cameras.main.startFollow(player);
 
 this.physics.add.collider(player, bordes);
 
+// COLLIDERS
+this.physics.add.collider(player, layersuelo);
+this.physics.add.collider(player, layerplataforma2);
+//this.physics.add.collider(player, layerplataforma2_1);
+
+//COLISIONES
+layersuelo.setCollisionByProperty({ collides: true})
+layerplataforma2.setCollisionByProperty({ collides: true})
+//layerplataforma2_1.setCollisionByProperty({ collides: true})
 
 //time
 time = this.physics.add.group({
@@ -108,14 +98,27 @@ life.children.iterate(function (child){
 })
 
 //enemigo
-araña = this.physics.add.group();
+/*araña = this.physics.add.group();
 araña.create(100, 300, 'arañaenemy').setScale(0.4)
 araña.create(200, 1030, 'arañaenemy'). setScale(0.4)
 araña.create(350, 1000, 'arañaenemy'). setScale(0.4)
 araña.create(350, 1000, 'arañaenemy'). setScale(0.4)
 araña.create(900, 1000, 'arañaenemy'). setScale(0.4)
-araña.create(800, 1000, 'arañaenemy'). setScale(0.4)
+araña.create(800, 1000, 'arañaenemy'). setScale(0.4)*/
 
+araña = this.physics.add.group({
+    key: 'arañaenemy',
+    repeat: Phaser.Math.FloatBetween(5,7),
+    setXY:{ x: 200, y: 350,  stepX: 100, stepY: 200 },
+    setScale: { x: 0.4, y: 0.4 },
+});
+araña.children.iterate(function (child){
+    child.setBounce(Phaser.Math.FloatBetween(0.9, 1));
+    child.x += Phaser.Math.FloatBetween(-7, 7) 
+    araña.setVelocity(Phaser.Math.Between(5, 200),20)
+   araña.allowGravity = true;
+  })
+ 
 //cambio de escena
 froggycambioWin = this.physics.add.group({
   key: 'win',
@@ -176,18 +179,17 @@ timeText2.scrollFactorY = 0;
 this.jumps = 0;
 
 //Esto añade los colliders
-this.physics.add.collider(player, platforms);
-this.physics.add.collider(recomosca, platforms);
-this.physics.add.collider(araña, platforms);
-this.physics.add.collider(araña, platforms, this.patrolPlatform, null, this);
+this.physics.add.collider(recomosca, layerplataforma2);
+this.physics.add.collider(araña, layerplataforma2);
+this.physics.add.collider(araña, layerplataforma2, this.patrolPlatform, null, this);
 this.physics.add.collider(araña, bordes); //esta funcion tiene agregado la patrol
 this.physics.add.overlap(player, recomosca, this.Recolectarmosca, null, this);
-this.physics.add.collider(life, platforms);
+this.physics.add.collider(life, layerplataforma2);
 this.physics.add.overlap(player, life, this.collectLife, null, this);
 this.physics.add.collider(player, araña, this.hitAraña, null, this);
-this.physics.add.collider(time, platforms);
+this.physics.add.collider(time, layerplataforma2);
 this.physics.add.overlap(player, time, this.collectTime, null, this);
-this.physics.add.collider(froggycambioWin, platforms);
+this.physics.add.collider(froggycambioWin, layerplataforma2);
 this.physics.add.overlap(player, froggycambioWin, this.cambiofroggywin, null, this);
 
 
@@ -258,7 +260,7 @@ update()
         player.anims.play('turn');
     }
 
-    if (cursors.up.isDown && player.body.touching.down){
+    if (cursors.up.isDown && player.body.onFloor()){
         this.sound.play('Jump')
         player.setVelocityY(-330);
     }
@@ -295,13 +297,16 @@ cambiofroggywin (player, froggycambioWin)
 }
 
 //patrullaje de arañas
-patrolPlatform(araña, platforms){
-   araña.setCollideWorldBounds(false);
-   araña.setBounce(0.8);
-   araña.setVelocity(Phaser.Math.Between(-200, 200),20)
+/*patrolPlatform(araña, layerplataforma2){
+   araña.setCollideWorldBounds(true);
+   araña.setBounce(2);
+   araña.setVelocity(Phaser.Math.Between(1, 200),20)
    araña.allowGravity = true;
+   araña.children.iterate(function (child){
+    child.setBounceY(Phaser.Math.FloatBetween(0.3, 0.6));
    
 }
+)}*/
 
 
 gameOver2() {  

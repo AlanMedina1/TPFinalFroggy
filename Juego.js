@@ -13,8 +13,8 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 220 },
-            debug: false
+            gravity: { y: 240 },
+            debug: true
         }
     },
     scene: [Escena1, Escena2, Escena3, Escena4, Escena5, Escena6, Escena7, Escena8]
@@ -70,3 +70,10 @@ var map;
 var musicConfig;
 
 
+var layerfondo;
+var layersuelo;
+var layerplataforma1;
+var layerplataforma1_2;
+var map;
+
+var layerplataforma2;
